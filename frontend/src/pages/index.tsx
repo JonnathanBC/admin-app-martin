@@ -2,8 +2,10 @@ import { Button } from '@chakra-ui/react'
 import styles from './index.module.css'
 import Head from 'next/head'
 import { env } from '~/env.mjs'
+import { useRouter } from 'next/router'
 
 export default function Home () {
+  const router = useRouter()
   return (
     <>
       <Head>
@@ -16,7 +18,14 @@ export default function Home () {
             {env.NEXT_PUBLIC_BACKEND_BASE_URL}
           </h1>
         </div>
-        <Button colorScheme='blue'>Login</Button>
+        <Button
+          onClick={() => {
+            void router.push('/login')
+          }}
+          colorScheme='blue'
+        >
+          Login
+        </Button>
       </main>
     </>
   )
