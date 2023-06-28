@@ -1,7 +1,6 @@
 version: '3'
 
 services:
-
     mongo:
         image: mongo
         restart: always
@@ -9,7 +8,7 @@ services:
         environment:
             MONGO_INITDB_ROOT_USERNAME: root
             MONGO_INITDB_ROOT_PASSWORD: 12345
-            # MONGO_INITDB_DATABASE: admin-app
+            MONGO_INITDB_DATABASE: admin-app
         volumes:
             - mongo_db:/data/db
         ports:
