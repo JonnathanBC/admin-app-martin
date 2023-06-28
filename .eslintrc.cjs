@@ -1,3 +1,4 @@
+
 module.exports = {
   env: {
     browser: true,
@@ -18,8 +19,11 @@ module.exports = {
     'react'
   ],
   rules: {
+    'react/react-in-jsx-scope': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-floating-promises': 'off',
-    '@typescript-eslint/promise-function-async': 'off'
+    '@typescript-eslint/promise-function-async': 'off',
+    'promise/prefer-await-to-then': 'off',
+    '@typescript-eslint/no-misused-promises': 'off'
   }
 }
