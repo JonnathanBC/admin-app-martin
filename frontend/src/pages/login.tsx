@@ -10,11 +10,22 @@ import {
   Input
 } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
-import axios from 'axios'
-import { env } from '~/env.mjs'
+import { useRouter } from 'next/router'
+import { generateCode, login } from 'services/login'
 
 const Login: NextPage = () => {
   const { register, getValues } = useForm()
+  const router = useRouter()
+
+  const handleLogin = (email: string, code: string) => {
+    login(email, code)
+      .then(() => router.push('/'))
+      .catch((err) => console.error(err))
+  }
+
+  const handleGenerateCode = (email: string) => {
+    generateCode(email)
+  }
 
   return (
     <Container marginTop={10}>
@@ -38,11 +49,19 @@ const Login: NextPage = () => {
             />
           </FormControl>
           <ButtonGroup marginTop={8}>
-            <Button colorScheme="blue">Iniciar Sesión</Button>
+            <Button
+              colorScheme="blue"
+              onClick={() => {
+                const { email, code } = getValues()
+                handleLogin(email, code)
+              }}
+              >
+                Iniciar Sesión
+              </Button>
             <Button
               onClick={() => {
                 const email: string = getValues('email')
-                axios.post(`${String(env.NEXT_PUBLIC_BACKEND_BASE_URL)}/auth/login/${email}/code`)
+                handleGenerateCode(email)
               }}
               colorScheme='red'
             >

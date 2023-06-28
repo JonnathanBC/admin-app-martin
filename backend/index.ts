@@ -5,13 +5,12 @@ import express from 'express'
 import mainRouter from './routes'
 
 const app = express()
+connectDB()
 
 app.use(cors({
   origin: 'http://localhost:3000'
 }))
-
-connectDB()
-
+app.use(express.json())
 app.use('/api', mainRouter)
 
 const PORT = process.env.PORT

@@ -1,4 +1,3 @@
-
 module.exports = {
   env: {
     browser: true,
@@ -24,6 +23,7 @@ module.exports = {
     '@typescript-eslint/no-floating-promises': 'off',
     '@typescript-eslint/promise-function-async': 'off',
     'promise/prefer-await-to-then': 'off',
-    '@typescript-eslint/no-misused-promises': 'off'
+    '@typescript-eslint/no-misused-promises': 'off',
+    '@typescript-eslint/strict-boolean-expressions': 'off'
   }
 }
