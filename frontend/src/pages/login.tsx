@@ -10,10 +10,10 @@ import {
   Heading,
   Input
 } from '@chakra-ui/react'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 import { z } from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod'
 import { generateCode, login } from 'services/login'
 
 const schema = z.object({
