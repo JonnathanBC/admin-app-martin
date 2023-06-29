@@ -8,17 +8,11 @@ export async function connectDB () {
     await mongoose.connect(process.env.MONGODB_URI)
     console.log('DB is connected')
 
-    /* const defaultUser = new User({
-      firstname: 'Jonnathan',
-      lastname: 'Baculima',
-      email: 'jonnabcl56@gmail.com',
-      loginCode: '123456',
-      roles: {
-        admin: true,
-        seller: true
-      }
-    })
-    await defaultUser.save() */
+    // await Sale.create({
+    //   operationDate: new Date(),
+    //   user: '649d0ca028851c0c40d9fc29',
+    //   totalAmount: 5000
+    // })
   } catch (error) {
     console.log('Error al conectarse a la DB', error)
   }

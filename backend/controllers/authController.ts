@@ -1,6 +1,8 @@
 import { Response, Request } from 'express'
+import jwt from 'jsonwebtoken'
 import { sendEmail } from '../helpers/mailer'
 import { User } from '../models/userModel'
+import { JWT_SECRET_KEY } from '../consts'
 
 export const login = async (req: Request, res: Response) => {
   const { email } = req.params
@@ -14,7 +16,16 @@ export const login = async (req: Request, res: Response) => {
     })
   }
 
-  // res.status(200).redirect('http://localhost:3000/')
+  const token = jwt.sign({
+    sub: user._id,
+    firstname: user.firstname,
+    lastname: user.lastname,
+    email: user.email,
+    roles: user.roles
+  }, JWT_SECRET_KEY)
+
+  res.cookie('jwt', token)
+
   res.status(200).json({
     ok: true,
     message: 'Inicio de sesión exitoso'

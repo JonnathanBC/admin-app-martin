@@ -5,5 +5,9 @@ export const generateCode = (email: string) => {
 }
 
 export const login = (email: string, code: string) => {
-  return apiClient.post(`/auth/login/${email}`, { code })
+  return apiClient.post(
+    `/auth/login/${email}`,
+    { code },
+    { withCredentials: true } // para setear la cookie en el navegador.
+  )
 }

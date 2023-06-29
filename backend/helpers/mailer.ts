@@ -1,11 +1,5 @@
 import nodemailer from 'nodemailer'
-
-interface EmailProps {
-  to: string
-  subject: string
-  html: string
-  bcc?: string
-}
+import { type EmailProps } from '../types'
 
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
@@ -19,7 +13,7 @@ const transporter = nodemailer.createTransport({
 
 export async function sendEmail ({ to, subject, html, bcc }: EmailProps) {
   try {
-    const result = await transporter.sendMail({
+    await transporter.sendMail({
       from: '<Company jonnabcl56@gmail.com>',
       to,
       bcc,
@@ -27,7 +21,6 @@ export async function sendEmail ({ to, subject, html, bcc }: EmailProps) {
       html
     })
 
-    console.log({ result })
     return {
       ok: true,
       message: 'Email enviado con éxito'
