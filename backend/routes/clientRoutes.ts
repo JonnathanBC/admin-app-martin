@@ -1,0 +1,11 @@
+import express from 'express'
+import { createClient, getAllClients } from '../controllers/clientsController'
+import { validateUser } from '../middlewares/authMiddleware'
+
+const clientRoutes = express.Router()
+clientRoutes.use(validateUser())
+
+clientRoutes.get('/', getAllClients)
+clientRoutes.post('/', createClient)
+
+export default clientRoutes

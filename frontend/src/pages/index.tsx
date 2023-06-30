@@ -1,7 +1,7 @@
 import { Button, ButtonGroup, Container, Heading } from '@chakra-ui/react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { createSale, getSales } from '~/services/sales'
+import { createSale } from '~/services/sales'
 
 export default function Home () {
   const router = useRouter()
@@ -24,11 +24,11 @@ export default function Home () {
           </Button>
           <Button
             onClick={() => {
-              getSales()
+              router.push('/clients/new')
             }}
             colorScheme='green'
           >
-            Get sales
+            Nuevo cliente
           </Button>
           <Button
             onClick={createSale}
