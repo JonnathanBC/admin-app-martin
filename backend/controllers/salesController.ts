@@ -10,7 +10,7 @@ export const getAllSales = async (req: any, res: Response) => {
       data: sales
     })
   } catch (e: any) {
-    res.status(401).json({ ok: true, message: e.message })
+    res.status(401).json({ ok: false, message: e.message })
   }
 }
 
