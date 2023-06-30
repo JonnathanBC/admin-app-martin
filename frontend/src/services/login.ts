@@ -8,6 +8,6 @@ export const login = (email: string, code: string) => {
   return apiClient.post(
     `/auth/login/${email}`,
     { code },
-    { withCredentials: true } // para setear la cookie en el navegador.
+    { withCredentials: true }// para setear la cookie en el navegador.
   )
 }

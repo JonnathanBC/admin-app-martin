@@ -4,6 +4,8 @@ import { JWT_SECRET_KEY } from '../consts'
 
 export const validateUser = () => (req: any, res: Response, next: NextFunction) => {
   try {
+    console.log('PROTECTED ROUTE')
+
     const token = req.cookies.jwt
     const user = jwt.verify(token, JWT_SECRET_KEY)
     req.user = user
