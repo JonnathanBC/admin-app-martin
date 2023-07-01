@@ -51,9 +51,9 @@ const Login: NextPage = () => {
   }
 
   return (
-    <Container marginTop={10}>
+    <Container mt={10}>
       <Heading textAlign="center">Iniciar Sesión</Heading>
-      <Card padding={3}>
+      <Card p={3}>
         <form onSubmit={handleSubmit(handleOnSubmit)}>
           <FormControl marginBottom={4} isInvalid={Boolean(errors.email)}>
             <FormLabel>Email address</FormLabel>
@@ -73,7 +73,7 @@ const Login: NextPage = () => {
             />
             <FormErrorMessage>{errors.code?.message}</FormErrorMessage>
           </FormControl>
-          <ButtonGroup marginTop={8}>
+          <ButtonGroup mt={8}>
             <Button
               colorScheme="blue"
               type='submit'
