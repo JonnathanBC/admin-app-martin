@@ -4,7 +4,7 @@ import {
   Card
 } from '@chakra-ui/react'
 import { NextPage } from 'next'
-import { ClientForm } from '~/components/entities/ClientForm'
+import { ClientForm } from '~/components/entities/clients/ClientForm'
 
 const NewClient: NextPage = () => {
   return (

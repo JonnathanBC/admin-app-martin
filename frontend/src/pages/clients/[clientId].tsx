@@ -5,7 +5,7 @@ import {
 } from '@chakra-ui/react'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import { ClientForm } from '~/components/entities/ClientForm'
+import { ClientForm } from '~/components/entities/clients/ClientForm'
 
 const EditClient: NextPage = () => {
   const router = useRouter()
