@@ -8,10 +8,10 @@ export async function connectDB () {
     await mongoose.connect(process.env.MONGODB_URI)
     console.log('DB is connected')
 
-    // await Sale.create({
-    //   operationDate: new Date(),
-    //   user: '649d0ca028851c0c40d9fc29',
-    //   totalAmount: 5000
+    // await Product.create({
+    //   name: 'Audifonos',
+    //   code: 'HSKJD77',
+    //   supplierCost: 25
     // })
   } catch (error) {
     console.log('Error al conectarse a la DB', error)
