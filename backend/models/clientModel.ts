@@ -3,24 +3,24 @@ import { Schema, model } from 'mongoose'
 const clientSchema = new Schema({
   firstname: {
     type: String,
-    require: true
+    required: true
   },
   lastname: {
     type: String,
-    require: true
+    required: true
   },
   email: {
     type: String,
-    require: true,
+    required: true,
     unique: true
   },
   documentType: {
     type: String,
-    require: true
+    required: true
   },
   documentValue: {
     type: String,
-    require: true
+    required: true
   },
   sale: {
     count: Number,
