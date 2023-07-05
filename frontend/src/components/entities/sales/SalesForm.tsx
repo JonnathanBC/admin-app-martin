@@ -6,10 +6,12 @@ import {
   FormControl,
   FormErrorMessage,
   FormLabel,
+  Heading,
   IconButton,
   Input,
   Select,
-  Spinner
+  Spinner,
+  Divider
 } from '@chakra-ui/react'
 import { DeleteIcon, SearchIcon } from '@chakra-ui/icons'
 import { useState } from 'react'
@@ -172,8 +174,22 @@ export function SaleForm ({ saleId }: Props) {
           <FormErrorMessage>{errors.operationDate?.message}</FormErrorMessage>
         </FormControl>
         {/* products */}
-        <Flex flexDir='column'>
-          {products.map((product, index) => (
+        <Flex flexDir='column' mb={8}>
+          <Flex justifyContent='space-between'>
+            <Heading size='lg'>Productos</Heading>
+            <Button
+              size='xs'
+              fontSize='1rem'
+              lineHeight='1rem'
+              py={4}
+              colorScheme='blue'
+              onClick={() => addProduct(defaultProduct)}
+            >
+              Agregar
+            </Button>
+          </Flex>
+          <Divider mb='3' mt='2' />
+          {products.map((_, index) => (
             <Flex key={index} gap={3} mb={5} alignItems='flex-end'>
               <IconButton
                 disabled
@@ -196,8 +212,8 @@ export function SaleForm ({ saleId }: Props) {
                   }
                 }}
               />
-              <FormControl flex={3}>
-                <FormLabel>Code</FormLabel>
+              <FormControl flex={2}>
+                {index === 0 && <FormLabel>Código</FormLabel>}
                 <Input
                   type='text'
                   placeholder="AAAAA00"
@@ -205,8 +221,8 @@ export function SaleForm ({ saleId }: Props) {
                 />
               </FormControl>
 
-              <FormControl flex={6}>
-                <FormLabel>Denominación</FormLabel>
+              <FormControl flex={5}>
+                {index === 0 && <FormLabel>Denominación</FormLabel>}
                 <Input
                   type='text'
                   placeholder="denominación"
@@ -216,8 +232,13 @@ export function SaleForm ({ saleId }: Props) {
               </FormControl>
 
               <FormControl flex={2}>
-                <Flex alignItems='center' justifyContent='space-between'>
-                  <FormLabel>Cantidad</FormLabel>
+                {index === 0 && <FormLabel>Cantidad</FormLabel>}
+                <Flex alignItems='end' justifyContent='space-between'>
+                  <Input
+                    width={'65px'}
+                    type='number'
+                    {...register(`products.${index}.quantity`)}
+                  />
                   {index > 0 && (
                     <DeleteIcon
                       mb={2}
@@ -229,27 +250,34 @@ export function SaleForm ({ saleId }: Props) {
                     </DeleteIcon>
                   )}
                 </Flex>
-                <Input
-                  type='number'
-                  {...register(`products.${index}.quantity`)}
-                />
               </FormControl>
             </Flex>
           ))}
-          <Button onClick={() => addProduct(defaultProduct)}>
-            Nuevo product
-          </Button>
         </Flex>
 
       {/* metodos de pago */}
         <Flex flexDir='column'>
+          <Flex justifyContent='space-between' mb={2}>
+            <Heading size='lg'>Forma de pago</Heading>
+            <Button
+              size='xs'
+              fontSize='1rem'
+              lineHeight='1rem'
+              py={4}
+              colorScheme='blue'
+              onClick={() => append(defaultPM)}
+            >
+              Agregar
+            </Button>
+          </Flex>
+          <Divider mb='3' mt='2' />
           {fields.map((field, index) => (
             <Flex key={index} gap={3} mb={5} alignItems='flex-end'>
               <FormControl
                 flex={7}
                 isInvalid={!!errors.paymentMethods}
               >
-                <FormLabel>Método</FormLabel>
+                {index === 0 && <FormLabel>Método</FormLabel>}
                 <Select
                   {...register(`paymentMethods.${index}.method`)}
                 >
@@ -262,11 +290,11 @@ export function SaleForm ({ saleId }: Props) {
               </FormControl>
 
               <FormControl
-                flex={3}
+                flex={2}
                 isInvalid={!!errors.paymentMethods}
                 // isInvalid={Boolean(errors.paymentMethods[0]?.amount)}
               >
-                <FormLabel>Valor</FormLabel>
+                {index === 0 && <FormLabel>Valor</FormLabel>}
                 <Input
                   type='text'
                   placeholder="123456789"
@@ -279,7 +307,7 @@ export function SaleForm ({ saleId }: Props) {
                 isInvalid={!!errors.paymentMethods}
                 // isInvalid={Boolean(errors.paymentMethods[0]?.amount)}
               >
-                <FormLabel>Plazo</FormLabel>
+                {index === 0 && <FormLabel>Plazo</FormLabel>}
                 <Input
                   type='text'
                   placeholder="0"
@@ -291,8 +319,17 @@ export function SaleForm ({ saleId }: Props) {
                 flex={4}
                 isInvalid={!!errors.paymentMethods}
               >
+                {index === 0 && <FormLabel>Período</FormLabel>}
                 <Flex alignItems='center' justifyContent='space-between'>
-                  <FormLabel>Período</FormLabel>
+                  <Select
+                    width={'100px'}
+                    {...register(`paymentMethods.${index}.timeUnit`)}
+                  >
+                    <option>Seleccionar...</option>
+                    {Object.keys(TIMES_UNITS.Enum).map((unit) => (
+                      <option key={unit}>{unit}</option>
+                    ))}
+                  </Select>
                   {index > 0 && (
                     <DeleteIcon
                       mb={2}
@@ -304,21 +341,10 @@ export function SaleForm ({ saleId }: Props) {
                     </DeleteIcon>
                   )}
                 </Flex>
-                <Select
-                  {...register(`paymentMethods.${index}.timeUnit`)}
-                >
-                  <option>Seleccionar...</option>
-                  {Object.keys(TIMES_UNITS.Enum).map((unit) => (
-                    <option key={unit}>{unit}</option>
-                  ))}
-                </Select>
                 <FormErrorMessage>{errors.paymentMethods?.message}</FormErrorMessage>
               </FormControl>
             </Flex>
           ))}
-          <Button onClick={() => append(defaultPM)}>
-            Nuevo método
-          </Button>
         </Flex>
         <ButtonGroup mt={4}>
           <Button type='submit' colorScheme='purple'>
